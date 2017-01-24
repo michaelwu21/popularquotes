@@ -1,0 +1,103 @@
+/*login stuff*/
+#login {
+	
+	z-index: 3;
+	position: fixed;
+    display: inline-block;
+	padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4); /* Black with opacity */
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;
+    }
+#modal_content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+	text-align: center;
+    padding: 0;
+    border: 1px solid #888;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.close {
+    color: white;
+    float: right;
+    font-size: 35px;
+    font-weight: bold;
+	margin-right: 12px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_body {
+    padding: 10px 0px;
+    background-color: #e6e9ef;
+}
+.green_submit {
+	border: none;
+	border-left: 2px solid lime;
+	border-bottom: 2px solid lime;
+	background-color: white;
+	padding: 13px 40px;
+	display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.white_submit {
+	border: none;
+	border-left: 2px solid #42e2f4;
+	border-bottom: 2px solid #42e2f4;
+	background-color: white;
+	padding: 13px 40px;
+	display: inline-block;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	margin-right: 25px;
+}
+.green_submit:hover, .white_submit:hover {
+	cursor: pointer;
+	background-color: #e0e1e2;
+}
+input [type=button], [type=submit] {
+	outline: none;
+}
+.title1 {
+	margin-top: -5px;
+}
+.close {
+	color: red;
+}
+#wrongpass {
+	display: none;
+}
+#loading {
+	display: none;
+}
+#remember_acc2 {
+	color: blue;
+	text-decoration: underline;
+}
+#remember_acc2:hover {
+	cursor: pointer;
+}
+#remember_acc3 {
+	display: none;
+	margin-bottom: -10px;
+	font-size: 15px;
+}
+#nav_signout {
+	display: none;
+}
+#nav_me {
+	display: none;
+}

@@ -1,0 +1,79 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>QuoteSharer</title>
+	<link rel="stylesheet" href="dataurl.css" />
+	<script src="pace.min.js"></script>
+	<link rel="stylesheet" href="nav.css" />
+	<link rel="stylesheet" href="css.css" />
+	<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="functions.js" type="text/javascript"></script>
+	<script src="functionsjquery.js" type="text/javascript"></script>
+	<script src="jscookie/js.cookie.js"></script>
+
+</head>	
+<body>
+<div id="website">
+<script>
+//turn off display of website, except for loader
+		document.getElementById("website").style.display="none";
+</script>
+	<div id="nav_bar">
+	<center>
+	<ul>
+	  <li><a id="nav_home">Home</a></li>
+	  <li><a id="nav_post">Post</a></li>
+	  <li id="nav_signout"><a>Sign Out</a></li>
+	  <li id="nav_login"><a>Sign In/Sign Up</a></li>
+	  <li id="nav_me"><a>Account</a></li>
+	  <li id="nav_loggedin"><a>Logged In!</a></li>
+	  <li id="nav_loggedout"><a>Signed Out!</a></li>
+	</ul>
+	</center>
+	<center>
+		<div id="login">
+			<div id="modal_content">
+				<span class="close">&times;</span>
+					<script>
+						window.onclick = function(event) {
+							if (event.target == login) {
+								login_close();
+							}
+						}
+					</script>
+				<div class="modal_body">
+					<div class="title1">
+						<h2 class="sign">Sign In</h2>
+					</div>
+					<form name = "auth">
+						<label>Username:</label>
+						<input type="text" name = "login_username" placeholder="Your Username" id="login_username"/><br>
+						<label>Password:</label>
+						<input type="password" name = "password" placeholder="Your Password" id="login_password"/><br>
+						<center>
+						<div style="position: absolute; margin-right: auto; margin-left: auto; left: 0; right: 0;">
+							<input type="checkbox" id="remember_acc" /><label for="remember_acc">Remember Username</label>&nbsp;<span id="remember_acc2">?</span>
+						</div>
+						</center>
+						<p id="remember_acc3" style="margin-top: 32px;">Remembers your username for the next time you log in(Please Enable Cookies)</p>
+						<br><br>
+						<input type="button" class="white_submit" id="sign_in" value = "Sign In" />
+						<input type="button" class="green_submit" id="sign_up" value = "Sign Up" />
+
+					</form>
+					<h3 id="wrongpass" style="color: red">Invalid Username or Password</h3>
+					<center><img src="images/loading.gif" id="loading" width="20%" height="20%" /></center>
+				</div>
+		</div> 
+	</div>		
+	
+	<div id="entire_home"></div>
+	<div id="entire_post">
+	
+	</div>
+</div>
+</body>
+</html>
