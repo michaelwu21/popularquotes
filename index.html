@@ -12,7 +12,7 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="functions.js" type="text/javascript"></script>
 	<script src="functionsjquery.js" type="text/javascript"></script>
-	<script src="jscookie/js.cookie.js"></script>
+	<script src="jscookie/js.cookie.js" type="text/javascript"></script>
 
 </head>	
 <body>
@@ -25,7 +25,7 @@
 	<center>
 	<ul>
 	  <li><a id="nav_home">Home</a></li>
-	  <li><a id="nav_post">Post</a></li>
+	  <li id="nav_post"><a>Post</a></li>
 	  <li id="nav_signout"><a>Sign Out</a></li>
 	  <li id="nav_login"><a>Sign In/Sign Up</a></li>
 	  <li id="nav_me"><a>Account</a></li>
@@ -51,7 +51,7 @@
 					<form name = "auth">
 						<label>Username:</label>
 						<input type="text" name = "login_username" placeholder="Your Username" id="login_username"/><br>
-						<label>Password:</label>
+						<label>Password:&nbsp;</label>
 						<input type="password" name = "password" placeholder="Your Password" id="login_password"/><br>
 						<center>
 						<div style="position: absolute; margin-right: auto; margin-left: auto; left: 0; right: 0;">
@@ -72,7 +72,13 @@
 	
 	<div id="entire_home"></div>
 	<div id="entire_post">
-	
+		<form name="post">
+		<br><br>
+			<label>Author</label><br>
+			<input type="text" name="post_author" id="post_author" placeholder="Leave Blank if Author Unknown" /><br>
+			<label>Quote:</label><br>
+			<textarea name="post_quote" id="post_quote" rows="15" cols="60" placeholder="Quote"></textarea>
+			<p id="post_clear" style="color: #0000EE;">Clear
 	</div>
 </div>
 </body>

@@ -1,7 +1,8 @@
 function loaded () {
 	if($(".pace-inactive").css('display') == 'none'){
-		$("#website").show();
+		$("#website").show('scale', 200);
 		var loaded = true;
+		nav_home();
 		clearInterval(interval);
 	}
 }	
@@ -14,7 +15,14 @@ function fadeout (elem, speed) {
 function login_close () {
 	$("#login").hide("slide", { direction: "left" }, 400);
 	$("#remember_acc3").hide();
+	setTimeout(function() {
+	login_clear()
+	},400);
 }
+function login_clear () {
+	$("#login_username").val("");
+	$("#login_password").val("");
+	}
 function login_open () {
 	$("#wrongpass").hide();
 	$("#login").show("slide", { direction: "left" }, 400);
@@ -29,16 +37,26 @@ function loggedout () {
 }
 //nav functions
 function nav_clear () {
-	$("#entire_home").hide("slide", { direction: "left" }, 200);
-	$("#entire_post").hide("slide", { direction: "left" }, 200);
-	$("#entire_me").hide("slide", { direction: "left" }, 200);
-	$("#entire_home").hide("slide", { direction: "left" }, 200);
+	$("#entire_home").hide("slide", { direction: "right" }, 200);
+	$("#entire_post").hide("slide", { direction: "right" }, 200);
+	$("#entire_me").hide("slide", { direction: "right" }, 200);
+	$("#entire_home").hide("slide", { direction: "right" }, 200);
 }
 function nav_home () {
 	nav_clear ();
 	$("#entire_home").show("slide", {direction: "left" }, 200);
 }
+function nav_post () {
+	if(checkifhidden("#entire_post")) {
+	nav_clear();
+	$("#entire_post").show("slide", {direction: "left" }, 200);
+	} else {
+	$("#entire_post").animate({ scrollTop: 0 }, "fast");
+	return false;
+	}
+}
 function checkuser () {
+	$("#wrongpass").hide();
 	$("#loading").show();
 	var username = $("#login_username").val();
 	var password1 = $("#login_password").val();
@@ -51,16 +69,25 @@ function checkuser () {
 	var username1 = username + "@popularquotes.com";
 	firebase.auth().signInWithEmailAndPassword(username1, password1).then(function(result) {
 		if (login_saveuser) {
+			Cookies.remove('c1');
 			Cookies.set('c1', username, { expires: 500 });
+			console.log("saved!");
 		}
-		$("#nav_me").html(username);
-		$("#nav_me").addClass("me");
 		$("#loading").hide();
 	}, function(error) {
 	$("#wrongpass").show();
 		$("#loading").hide();
+		return false;
 	})
 }
 function firebase_signout() {
 	firebase.auth().signOut();
 }
+function checkifhidden (elem) {
+	if($(elem).is(":visible")){
+		return false
+	} else {
+		return true;
+	}
+}
+	

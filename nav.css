@@ -16,9 +16,9 @@ li a, .dropbtn, .me {
     display: inline-block;
     color: black;
     text-align: center;
-    padding: 16px 30px;
+    padding: 16px 35px;
     text-decoration: none!important;
-    
+    text-transform: capitalize;
 }
 /*li {
 	float:left;
@@ -27,13 +27,17 @@ li a, .dropbtn, .me {
 #nav_home, #nav_post {
 	float: left;
 }
+#nav_home {
+	padding-left: 55px;
+	padding-right: 55px;
+}
 #nav_login, #nav_me, #nav_signout {
 	float: right;
 }
 #nav_post:hover, #nav_home:hover {
 	background-color: #818387;
     cursor: pointer;
-    color: white;
+    color: white!important;
     transition: background-color 0.3s, color 0.5s;
 }
 #nav_login {
@@ -63,4 +67,16 @@ li a, .dropbtn, .me {
 }
 #nav_loggedout {
 	background-color: red;
+}
+#nav_signout {
+	display: none;
+}
+#nav_me {
+	display: none;
+	background-color: yellow!important;
+}
+#nav_post {
+	display: none;
+	padding-left: 37px!important;
+	padding-right: 37px!important;
 }

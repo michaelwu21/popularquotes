@@ -1,3 +1,7 @@
+body, html {
+	position: relative;
+	overflow: hidden;
+}
 /*login stuff*/
 #login {
 	
@@ -84,7 +88,7 @@ input [type=button], [type=submit] {
 	display: none;
 }
 #remember_acc2 {
-	color: blue;
+	color: #0000EE;
 	text-decoration: underline;
 }
 #remember_acc2:hover {
@@ -95,9 +99,23 @@ input [type=button], [type=submit] {
 	margin-bottom: -10px;
 	font-size: 15px;
 }
-#nav_signout {
-	display: none;
+textarea {
+	overflow: auto;
+	resize: none;
 }
-#nav_me {
-	display: none;
+#post_author {
+	padding: 10px 20px;
+	width: 30%;
+	border-width: 2px;
+	border-color: yellow;
+	outline-width: 0px;
+	box-shadow: none!important;
+	border-style: solid;
+}
+#login_username, #login_password {
+	padding: 8px 16px;
+	width: 30%;
+	border-radius: 3px;
+	border: none;
+	margin-bottom: 12px;
 }

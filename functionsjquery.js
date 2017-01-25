@@ -14,14 +14,22 @@
 			  $("#nav_login").hide();
 			  $("#nav_me").show();
 			  $("#nav_signout").show();
+			  $("#nav_post").show();
+			  var current_user = user.email;
+			  var atposition = current_user.indexOf("@");
+			  var current_username = current_user.slice(0, atposition);
+			  $("#nav_me").html(current_username);
+			  $("#nav_me").addClass("me");
 			  login_close();
 			  loggedin();
 
 		  } else {
-			  loggedout();
 			  $("#nav_me").hide();
 			  $("#nav_signout").hide();
 			  $("#nav_login").show();
+			  $("#nav_post").hide();
+			  loggedout();
+			  nav_home();
 		  }
 			  
 	  })
@@ -31,7 +39,6 @@ var interval = setInterval(loaded, 50);
 
 $(function() {
 	
-
 //sign in
 	
 	//close login
@@ -44,11 +51,13 @@ $(function() {
 	})	
 	//navigate functions
 	$("#nav_home").click(function() {
-		console.log("Navigated Home!");
 		nav_home();
 	});
 	$("#nav_signout").click(function () {
 		firebase_signout();
+	})
+	$("#nav_post").click(function () {
+		nav_post();
 	})
 	
 	$("#remember_acc2").click(function() {
@@ -58,8 +67,27 @@ $(function() {
 	$("#sign_in").click(function () {
 		checkuser();
 	});
+	//submit on enter key as well
+	$("#login").keypress(function(e) {
+    if(e.which == 13) {
+        checkuser();
+    }
+	});
 	$("#sign_up").click(function () {
 		firebasesignup();
+	});
+	
+	$("#post_author").focus(function () {
+		$(this).css("border-color", "orange");
+	});
+	$("#post_author").blur(function () {
+		$(this).css("border-color", "yellow");
+	});
+	$("#nav_post").mouseenter(function() {
+		$(this).css("color", "white");
+	});
+	$("#nav_post").mouseleave(function() {
+		$(this).css("color", "black");
 	});
 	
 });
