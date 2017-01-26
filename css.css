@@ -103,7 +103,7 @@ textarea {
 	overflow: auto;
 	resize: none;
 }
-#post_author {
+#post_author, #post_quote {
 	padding: 10px 20px;
 	width: 30%;
 	border-width: 2px;
@@ -111,6 +111,16 @@ textarea {
 	outline-width: 0px;
 	box-shadow: none!important;
 	border-style: solid;
+	font-family: arial;
+	font-size: 14px;
+}
+
+#post_clear {
+	padding-top: 10px;
+}
+#post_clear:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
 #login_username, #login_password {
 	padding: 8px 16px;
@@ -118,4 +128,10 @@ textarea {
 	border-radius: 3px;
 	border: none;
 	margin-bottom: 12px;
+}
+.importanthidden {
+	display: none!important;
+}
+.centerplaceholder::-webkit-input-placeholder {
+	text-align: center;
 }

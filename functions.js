@@ -4,8 +4,19 @@ function loaded () {
 		var loaded = true;
 		nav_home();
 		clearInterval(interval);
+		removejscssfile("dataurl.css", "css");
 	}
 }	
+//remove js and css of load screen to remove loading bug
+function removejscssfile(filename, filetype){
+    var targetelement=(filetype=="js")? "script" : (filetype=="css")? "link" : "none" //determine element type to create nodelist from
+    var targetattr=(filetype=="js")? "src" : (filetype=="css")? "href" : "none" //determine corresponding attribute to test for
+    var allsuspects=document.getElementsByTagName(targetelement)
+    for (var i=allsuspects.length; i>=0; i--){ //search backwards within nodelist for matching elements to remove
+    if (allsuspects[i] && allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(filename)!=-1)
+        allsuspects[i].parentNode.removeChild(allsuspects[i]) //remove element by calling parentNode.removeChild()
+    }
+}
 //cool functions
 function fadeout (elem, speed) {
 	$(elem).animate({opacity: '0'}, speed)
@@ -24,6 +35,8 @@ function login_clear () {
 	$("#login_password").val("");
 	}
 function login_open () {
+	var remeberedusername = Cookies.get('c1')
+	$("#login_username").val(remeberedusername);
 	$("#wrongpass").hide();
 	$("#login").show("slide", { direction: "left" }, 400);
 }
@@ -70,8 +83,8 @@ function checkuser () {
 	firebase.auth().signInWithEmailAndPassword(username1, password1).then(function(result) {
 		if (login_saveuser) {
 			Cookies.remove('c1');
-			Cookies.set('c1', username, { expires: 500 });
-			console.log("saved!");
+			Cookies.set('c1', 'hi', { expires: 10 });
+			console.log(Cookies.get('c1'));
 		}
 		$("#loading").hide();
 	}, function(error) {
@@ -89,5 +102,11 @@ function checkifhidden (elem) {
 	} else {
 		return true;
 	}
+}
+
+//post
+function post_clear () {
+	$("#post_quote").val("");
+	$("#post_author").val("");
 }
 	

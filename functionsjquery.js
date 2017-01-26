@@ -83,11 +83,14 @@ $(function() {
 	$("#post_author").blur(function () {
 		$(this).css("border-color", "yellow");
 	});
-	$("#nav_post").mouseenter(function() {
-		$(this).css("color", "white");
+	$("#post_quote").focus(function () {
+		$(this).css("border-color", "orange");
 	});
-	$("#nav_post").mouseleave(function() {
-		$(this).css("color", "black");
+	$("#post_quote").blur(function () {
+		$(this).css("border-color", "yellow");
+	});
+	$("#post_clear").click(function () {
+		post_clear();
 	});
 	
 });
