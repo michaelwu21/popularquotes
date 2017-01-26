@@ -35,8 +35,16 @@ function login_clear () {
 	$("#login_password").val("");
 	}
 function login_open () {
-	var remeberedusername = Cookies.get('c1')
-	$("#login_username").val(remeberedusername);
+	var rememberedusername = Cookies.get('c1');
+	if (typeof rememberedusername === 'undefined') {
+		$("#entire_forget").hide();
+		$("#entire_remember").show();
+	} else {
+		console.log(rememberedusername);
+		$("#login_username").val(rememberedusername);
+		$("#entire_forget").show();
+		$("#entire_remember").hide();
+	}
 	$("#wrongpass").hide();
 	$("#login").show("slide", { direction: "left" }, 400);
 }
@@ -82,9 +90,8 @@ function checkuser () {
 	var username1 = username + "@popularquotes.com";
 	firebase.auth().signInWithEmailAndPassword(username1, password1).then(function(result) {
 		if (login_saveuser) {
-			Cookies.remove('c1');
-			Cookies.set('c1', 'hi', { expires: 10 });
-			console.log(Cookies.get('c1'));
+			Cookies.set('c1', username, { expires: 500 });
+			console.log(Cookies.get('c1') + 'saved!');
 		}
 		$("#loading").hide();
 	}, function(error) {

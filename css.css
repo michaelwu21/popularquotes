@@ -132,6 +132,9 @@ textarea {
 .importanthidden {
 	display: none!important;
 }
+#login {
+	display: none;
+}
 .centerplaceholder::-webkit-input-placeholder {
 	text-align: center;
 }

@@ -92,5 +92,8 @@ $(function() {
 	$("#post_clear").click(function () {
 		post_clear();
 	});
+	$("#forget_acc").click(function () {
+		Cookies.remove('c1');
+	});
 	
 });
