@@ -17,6 +17,23 @@ function removejscssfile(filename, filetype){
         allsuspects[i].parentNode.removeChild(allsuspects[i]) //remove element by calling parentNode.removeChild()
     }
 }
+function newPost (auth, quote1) {
+	var current_username = $("#nav_me").html();
+	firebase.database().ref(current_username).set({
+		author: auth,
+		quote: quote1
+	});
+	}
+function createnewpost () {
+	$("#post_error").hide();
+	var quote = $("#post_quote").val();
+	var author = $("#post_author").val();
+	if (quote != "") {
+		newPost(author, quote);
+	} else {
+		$("#post_error").show("shake", 300);
+	}
+}
 //cool functions
 function fadeout (elem, speed) {
 	$(elem).animate({opacity: '0'}, speed)
@@ -70,6 +87,7 @@ function nav_home () {
 function nav_post () {
 	if(checkifhidden("#entire_post")) {
 	nav_clear();
+	$("#post_error").hide();
 	$("#entire_post").show("slide", {direction: "left" }, 200);
 	} else {
 	$("#entire_post").animate({ scrollTop: 0 }, "fast");

@@ -92,8 +92,12 @@ $(function() {
 	$("#post_clear").click(function () {
 		post_clear();
 	});
-	$("#forget_acc").click(function () {
+	$("#entire_forget").click(function () {
 		Cookies.remove('c1');
+		$("#entire_forget").hide();
+		$("#entire_remember").show();
 	});
-	
+	$("#post").click(function () {
+		createnewpost();
+	});
 });

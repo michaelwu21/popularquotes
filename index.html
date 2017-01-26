@@ -59,9 +59,9 @@
 						</div>
 						</center>
 						<p id="remember_acc3" style="margin-top: 32px;">Remembers your username for the next time you log in(Please Enable Cookies)</p>
-						<div id="entire_forget" style="position: absolute; margin-right: auto; margin-left: auto; left: 0; right: 0;">
+						<span id="entire_forget" style="position: absolute; margin-right: auto; margin-left: auto; left: 0; right: 0;">
 							<label>Forget Username</label>
-						</div>
+						</span>
 						<br><br>
 						<input type="button" class="white_submit" id="sign_in" value = "Sign In" />
 						<input type="button" class="green_submit" id="sign_up" value = "Sign Up" />
@@ -81,7 +81,10 @@
 			<input type="text" name="post_author" id="post_author" class="centerplaceholder" placeholder="Leave Blank if Author Unknown" /><br>
 			<label>Quote:</label><br>
 			<textarea name="post_quote" id="post_quote" class="centerplaceholder" rows="15" cols="60" placeholder="Quote"></textarea><br>
-			<span id="post_clear" style="color: #0000EE;">Clear</span>
+			<span id="post_error" style="color: red">Quote cannot be empty!</span>
+			<span id="post_clear" style="color: #0000EE;">Clear</span><br>
+			<input type="button" id="post" value="Post!" />
+			</form>
 	</div>
 </div>
 </body>
