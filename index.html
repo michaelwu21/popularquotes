@@ -68,17 +68,19 @@
 
 					</form>
 					<h3 id="wrongpass" style="color: red">Invalid Username or Password</h3>
+					<h3 id="wrongpass1" style="color:red">Email already exists!</h3>
 					<center><img src="images/loading.gif" id="loading" width="20%" height="20%" /></center>
 				</div>
 		</div> 
 	</div>		
 	
-	<div id="entire_home"></div>
+	<div id="entire_home">
+	</div>
 	<div id="entire_post">
 		<form name="post">
 		<br><br>
 			<label>Author</label><br>
-			<input type="text" name="post_author" id="post_author" class="centerplaceholder" placeholder="Leave Blank if Author Unknown" /><br>
+			<input type="text" name="post_author" id="post_author" class="centerplaceholder" placeholder="Leave Blank if Author Unknown" /><br><br>
 			<label>Quote:</label><br>
 			<textarea name="post_quote" id="post_quote" class="centerplaceholder" rows="15" cols="60" placeholder="Quote"></textarea><br>
 			<span id="post_error" style="color: red">Quote cannot be empty!</span>

@@ -17,11 +17,61 @@ function removejscssfile(filename, filetype){
         allsuspects[i].parentNode.removeChild(allsuspects[i]) //remove element by calling parentNode.removeChild()
     }
 }
+/*function getPost () {
+	var database = firebase.database();
+	var date = + new Date();
+	var oneweek = date - 604800000;
+	var recentposts = firebase.database().ref('/').limitToFirst(50)
+	var recentposts1 = JSON.stringify(recentposts)
+	/*var snap = snapshot.val();
+
+	console.log(recentposts1);
+
+
+}*/
+function getPost (number) {
+	var previous = 'none';
+	var current_date = + new Date();
+	var oneweek = current_date - 604800000;
+	var database = firebase.database().ref().child("posts").limitToLast(number);
+	database.on("child_added", snap => {
+		var date = snap.child("date").val();
+		if (date > oneweek) {
+			var likes = snap.child("likes").val();
+			var poster = snap.child("poster").val();
+			var author = snap.child("author").val();
+			var quote = snap.child("quote").val();
+			showPost(likes, poster, author, quote, date, previous);
+			previous = date;
+		} else {
+			firebase.database().ref("posts/" + date).remove();
+		}
+
+	});
+}
+function showPost (likes, poster, author, quote, date, previous) {
+	if (previous === 'none') {
+		$("<div class='post'><div class='poster'></div><div class='likes'></div><div class='author'></div><div class='quote'></div><div class='date'></div></div>").appendTo("#entire_home");
+		$('.post').first().attr('id', date);
+		console.log('firstpostloaded');
+	} else {
+		var previous1 = '#' + previous
+		$("<div class = 'post'><div class='poster'></div><div class='likes'></div><div class='author'></div><div class='quote'></div><div class='date'></div></div>").insertBefore(previous1);			
+		$('.post').first().attr('id', date);
+		console.log('postloaded');
+	}
+	
+}
 function newPost (auth, quote1) {
+	var database = firebase.database();
 	var current_username = $("#nav_me").html();
-	firebase.database().ref(current_username).set({
+	var date = + new Date();
+	database.ref('posts/' + date).set({
+		poster: current_username,
+		date: date,
 		author: auth,
-		quote: quote1
+		quote: quote1,
+		likes: 0
 	});
 	}
 function createnewpost () {
@@ -41,6 +91,7 @@ function fadeout (elem, speed) {
 
 //open login/signup
 function login_close () {
+	$("#loading").hide();
 	$("#login").hide("slide", { direction: "left" }, 400);
 	$("#remember_acc3").hide();
 	setTimeout(function() {
@@ -52,6 +103,7 @@ function login_clear () {
 	$("#login_password").val("");
 	}
 function login_open () {
+	$("#loading").hide();
 	var rememberedusername = Cookies.get('c1');
 	if (typeof rememberedusername === 'undefined') {
 		$("#entire_forget").hide();
@@ -105,7 +157,7 @@ function checkuser () {
 	}else {
 		var login_saveuser = false;
 	}
-	var username1 = username + "@popularquotes.com";
+	var username1 = username.toLowerCase() + "@popularquotes.com";
 	firebase.auth().signInWithEmailAndPassword(username1, password1).then(function(result) {
 		if (login_saveuser) {
 			Cookies.set('c1', username, { expires: 500 });
@@ -113,10 +165,35 @@ function checkuser () {
 		}
 		$("#loading").hide();
 	}, function(error) {
-	$("#wrongpass").show();
+		$("#wrongpass").show();
 		$("#loading").hide();
-		return false;
-	})
+		return;
+	});
+}
+function createuser () {
+	$("#wrongpass").hide();
+	$("#loading").show();
+	var username = $("#login_username").val();
+	var password1 = $("#login_password").val();
+	if($("#remember_acc").is(':checked')){
+		var login_saveuser = true;
+		console.log("saving username...");
+	}else {
+		var login_saveuser = false;
+	}
+	var username1 = username.toLowerCase() + "@popularquotes.com";
+	firebase.auth().createUserWithEmailAndPassword(username1, password1).then(function (result) {
+		if (login_saveuser) {
+			Cookies.set('c1', username, { expires: 500 });
+			console.log(Cookies.get('c1') + 'saved!');
+		}
+		firebase.signInWithEmailAndPassword(username1, password1);
+		$("#loading").hide();
+	}, function(error) {
+		$("#wrongpass1").show();
+		$("#loading").hide();
+		return;
+	});
 }
 function firebase_signout() {
 	firebase.auth().signOut();

@@ -11,6 +11,7 @@
 	  var database = firebase.database();
 	  firebase.auth().onAuthStateChanged(function(user) {
 		  if (user) {
+			  getPost(50);
 			  $("#nav_login").hide();
 			  $("#nav_me").show();
 			  $("#nav_signout").show();
@@ -74,7 +75,7 @@ $(function() {
     }
 	});
 	$("#sign_up").click(function () {
-		firebasesignup();
+		createuser();
 	});
 	
 	$("#post_author").focus(function () {
