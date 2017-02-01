@@ -17,6 +17,7 @@ $(function() {
 	  var database = firebase.database();
 	  firebase.auth().onAuthStateChanged(function(user) {
 		  if (user) {
+			  document.title="QuoteSharer - Home"
 			  $("#nav_login").hide();
 			  $("#nav_me").show();
 			  $("#nav_signout").show();
@@ -34,7 +35,10 @@ $(function() {
 			  $("#nav_signout").hide();
 			  $("#nav_login").show();
 			  $("#nav_post").hide();
+			  if(typeof firsttime21 == 'undefined'){
 			  loggedout();
+			  var firsttime21 = true;
+			  }
 			  nav_home();
 		  }
 			  

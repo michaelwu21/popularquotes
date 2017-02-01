@@ -202,6 +202,7 @@ function nav_homefirst () {
 		  $("#nav_signout").hide();
 		  $("#nav_login").show();
 		  $("#nav_post").hide();
+		  $("#nav_loggedout").hide();
 	}
 	nav_clear ();
 	$("#home").show("slide", { direction: "left" }, 200);

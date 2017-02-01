@@ -170,7 +170,7 @@ textarea {
 	cursor: pointer;
 	background-color: green;
 }
-#poster1 {
+.poster1 {
 	text-transform: capitalize;
 }
 #entire_home {
