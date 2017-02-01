@@ -1,3 +1,9 @@
+
+//make website visible after loading
+var interval = setInterval(loaded, 50);
+
+$(function() {
+
 (function() {
 	// Initialize Firebase
 	  var config = {
@@ -33,12 +39,7 @@
 		  }
 			  
 	  })
-}());
-//make website visible after loading
-var interval = setInterval(loaded, 50);
-
-$(function() {
-	
+}());	
 //sign in
 	
 	//close login

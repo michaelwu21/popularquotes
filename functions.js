@@ -5,13 +5,13 @@ function loaded () {
 		var loaded = true;
 		nav_homefirst();
 		clearInterval(interval);
-	console.log("page loaded")
-	var accheight = $("#nav").innerHeight() - 10;
-	var accwidth = $("#nav_me").width();
-	$(".dropdown").css("margin-top", accheight);
-	$(".dropdown").css("width", accwidth);
-	removejscssfile("dataurl.css", "css");
-	getPost(50);
+		console.log("page loaded")
+		var accheight = $("#nav").innerHeight() + 10;
+		var accwidth = $("#nav_me").width();
+		$(".dropdown").css("margin-top", accheight);
+		$(".dropdown").css("width", accwidth);
+		removejscssfile("dataurl.css", "css");
+		getPost(50);
 	}
 }	
 //remove js and css of load screen to remove loading bug
@@ -171,7 +171,7 @@ function nav_clear () {
 	$("#entire_settings").hide("slide", { direction: "right" }, 200);
 }
 function nav_home () {
-	document.title="Popular Quotes- Home"
+	document.title="QuoteSharer - Home"
 	if(checkifhidden("#entire_home")) {
 	nav_clear ();
 	$("#home").show("slide", { direction: "left" }, 200);
@@ -182,13 +182,33 @@ function nav_home () {
 	}
 }
 function nav_homefirst () {
-	document.title="Popular Quotes- Home"
+	document.title="QuoteSharer - Home"
+	var user = firebase.auth().currentUser;
+
+	if (user) {
+		
+		$("#nav_login").hide();
+		$("#nav_me").show();
+		$("#nav_signout").show();
+		$("#nav_post").show();
+		var current_user = user.email;
+		var atposition = current_user.indexOf("@");
+		var current_username = current_user.slice(0, atposition);
+		$("#nav_me1").html(current_username);
+		$("#nav_me1").addClass("me");
+		login_close();
+	} else {
+		  $("#nav_me").hide();
+		  $("#nav_signout").hide();
+		  $("#nav_login").show();
+		  $("#nav_post").hide();
+	}
 	nav_clear ();
 	$("#home").show("slide", { direction: "left" }, 200);
 	$("#entire_home").show("slide", { direction: "left" }, 200);
 }
 function nav_post () {
-	document.title="Popular Quotes- Post"
+	document.title="QuoteSharer - Post"
 	if(checkifhidden("#entire_post")) {
 	nav_clear();
 	$("#post_error").hide();
@@ -196,7 +216,7 @@ function nav_post () {
 	}
 }
 function nav_settings () {
-	document.title="Popular Quotes- Settings"
+	document.title="QuoteSharer - Settings"
 	if(checkifhidden("#entire_settings")) {
 		nav_clear();
 		$("#entire_settings").show("slide", { direction: "left" }, 200);

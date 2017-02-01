@@ -35,8 +35,8 @@ li a, .me {
 	float: left;
 }
 #nav_home {
-	padding-left: 55px;
-	padding-right: 55px;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 #nav_login, #nav_me {
 	float: right;
