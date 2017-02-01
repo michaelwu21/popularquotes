@@ -1,6 +1,5 @@
 body, html {
-	position: relative;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 /*login stuff*/
 #login {
@@ -81,7 +80,7 @@ input [type=button], [type=submit] {
 .close {
 	color: red;
 }
-#wrongpass, #wrongpass1 {
+#wrongpass, #wrongpass1, #wrongpass2 {
 	display: none;
 }
 #loading {
@@ -114,7 +113,9 @@ textarea {
 	font-family: arial;
 	font-size: 14px;
 }
-
+#entire_post {
+	display: none;
+}
 #post_clear {
 	padding-top: 10px;
 }
@@ -157,4 +158,45 @@ textarea {
 #post_error {
 	display: none;
 }
-	
+#post {
+	margin-top: 10px;
+	border: none;
+	padding: 20px 50px;
+	background-color: lime;
+	border-radius: 5px;
+}
+#post:hover {
+	color: white;
+	cursor: pointer;
+	background-color: green;
+}
+#poster1 {
+	text-transform: capitalize;
+}
+#entire_home {
+	margin-top: 70px;
+	width: 100%;
+	height: auto;
+	min-height: 90%;
+	text-align: center;
+}
+#refresh {
+	left: 80px;
+	bottom: 40px;
+	padding: 7px 20px;
+	width: 100px;
+	text-align: center;
+	border-style: solid;
+	border-width: 2px;
+	border-color: blue;
+	background-color: cyan;
+	position: fixed;
+	border-radius: 4px;
+}
+#refresh:hover {
+	cursor: pointer;
+	background-color: #18afaf;
+}
+#delete_acc:hover {
+	cursor: pointer;
+}

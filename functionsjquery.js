@@ -11,7 +11,6 @@
 	  var database = firebase.database();
 	  firebase.auth().onAuthStateChanged(function(user) {
 		  if (user) {
-			  getPost(50);
 			  $("#nav_login").hide();
 			  $("#nav_me").show();
 			  $("#nav_signout").show();
@@ -19,8 +18,8 @@
 			  var current_user = user.email;
 			  var atposition = current_user.indexOf("@");
 			  var current_username = current_user.slice(0, atposition);
-			  $("#nav_me").html(current_username);
-			  $("#nav_me").addClass("me");
+			  $("#nav_me1").html(current_username);
+			  $("#nav_me1").addClass("me");
 			  login_close();
 			  loggedin();
 
@@ -60,7 +59,12 @@ $(function() {
 	$("#nav_post").click(function () {
 		nav_post();
 	})
-	
+	$("#nav_settings").click(function () {
+		nav_settings();
+	});
+	$("#delete_acc").click(function () {
+		firebase.auth().currentUser.delete();
+	});
 	$("#remember_acc2").click(function() {
 		$("#remember_acc3").slideToggle();
 	});
@@ -100,5 +104,23 @@ $(function() {
 	});
 	$("#post").click(function () {
 		createnewpost();
+	});
+	$("#nav_me").mouseenter(function () {
+		$(".dropdown").hide();
+		$("#nav").addClass("importantoverflow");
+		$(".dropdown").css("max-height", "400px");
+		$(".dropdown").css("overflow", "visible");
+		$(this).addClass("active");
+		$(".dropdown").slideDown(150);
+	});
+	$("#nav_me").mouseleave(function () {
+		$("#nav").removeClass("importantoverflow");
+		$(".dropdown").css("max-height", "0px");
+		$(".dropdown").css("overflow", "hidden");
+		$(this).removeClass("active");
+		$(".dropdown").slideUp(150);
+	});
+	$("#refresh").click(function () {
+		refreshposts(50);
 	});
 });

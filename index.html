@@ -13,6 +13,7 @@
 	<script src="functions.js" type="text/javascript"></script>
 	<script src="functionsjquery.js" type="text/javascript"></script>
 	<script src="jscookie/js.cookie.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>	
 <body>
@@ -23,12 +24,18 @@
 </script>
 	<div id="nav_bar">
 	<center>
-	<ul>
-	  <li><a id="nav_home">Home</a></li>
+	<ul id="nav">
+	  <li id="nav_home"><a>Home</a></li>
 	  <li id="nav_post"><a>Post</a></li>
-	  <li id="nav_signout"><a>Sign Out</a></li>
 	  <li id="nav_login"><a>Sign In/Sign Up</a></li>
-	  <li id="nav_me"><a>Account</a></li>
+	  <div id="nav_me" class="wrapper-dropdown-5" tabindex="1">
+		<div id="nav_me1">Account</div>
+		<ul class="dropdown">
+			<li><a><i class="fa fa-user"></i>&nbsp;Profile</a></li>
+			<li id="nav_settings"><a><i class="fa fa-cog"></i>Settings</a></li>
+			<li id="nav_signout"><a><i class="fa fa-user-times"></i>Log out</a></li>
+		</ul>
+	  </div>
 	  <li id="nav_loggedin"><a>Logged In!</a></li>
 	  <li id="nav_loggedout"><a>Signed Out!</a></li>
 	</ul>
@@ -69,24 +76,31 @@
 					</form>
 					<h3 id="wrongpass" style="color: red">Invalid Username or Password</h3>
 					<h3 id="wrongpass1" style="color:red">Email already exists!</h3>
+					<h3 id="wrongpass2" style="color:red">Email/Password cannot be blank</h3>
 					<center><img src="images/loading.gif" id="loading" width="20%" height="20%" /></center>
 				</div>
 		</div> 
 	</div>		
-	
-	<div id="entire_home">
+	<div id="home">
+		<button id="refresh"><p id="refresh_text">Refresh</p></button>
+		<div id="entire_home">
+		</div>
 	</div>
 	<div id="entire_post">
 		<form name="post">
-		<br><br>
+		<br><br><br><br>
 			<label>Author</label><br>
 			<input type="text" name="post_author" id="post_author" class="centerplaceholder" placeholder="Leave Blank if Author Unknown" /><br><br>
 			<label>Quote:</label><br>
 			<textarea name="post_quote" id="post_quote" class="centerplaceholder" rows="15" cols="60" placeholder="Quote"></textarea><br>
-			<span id="post_error" style="color: red">Quote cannot be empty!</span>
 			<span id="post_clear" style="color: #0000EE;">Clear</span><br>
+			<span id="post_error" style="color: red">Quote cannot be empty!</span><br>
 			<input type="button" id="post" value="Post!" />
 			</form>
+	</div>
+	<div id="entire_settings">
+	<br><br><br>
+	<h1 id="delete_acc" style="color: red">Delete Account</h1>
 	</div>
 </div>
 </body>

@@ -1,10 +1,17 @@
 function loaded () {
+	$("#nav_me").hide();
 	if($(".pace-inactive").css('display') == 'none'){
 		$("#website").show('scale', 200);
 		var loaded = true;
-		nav_home();
+		nav_homefirst();
 		clearInterval(interval);
-		removejscssfile("dataurl.css", "css");
+	console.log("page loaded")
+	var accheight = $("#nav").innerHeight() - 10;
+	var accwidth = $("#nav_me").width();
+	$(".dropdown").css("margin-top", accheight);
+	$(".dropdown").css("width", accwidth);
+	removejscssfile("dataurl.css", "css");
+	getPost(50);
 	}
 }	
 //remove js and css of load screen to remove loading bug
@@ -17,18 +24,7 @@ function removejscssfile(filename, filetype){
         allsuspects[i].parentNode.removeChild(allsuspects[i]) //remove element by calling parentNode.removeChild()
     }
 }
-/*function getPost () {
-	var database = firebase.database();
-	var date = + new Date();
-	var oneweek = date - 604800000;
-	var recentposts = firebase.database().ref('/').limitToFirst(50)
-	var recentposts1 = JSON.stringify(recentposts)
-	/*var snap = snapshot.val();
 
-	console.log(recentposts1);
-
-
-}*/
 function getPost (number) {
 	var previous = 'none';
 	var current_date = + new Date();
@@ -38,33 +34,46 @@ function getPost (number) {
 		var date = snap.child("date").val();
 		if (date > oneweek) {
 			var likes = snap.child("likes").val();
-			var poster = snap.child("poster").val();
+			var poster1 = snap.child("poster").val();
 			var author = snap.child("author").val();
 			var quote = snap.child("quote").val();
-			showPost(likes, poster, author, quote, date, previous);
+			showPost(likes, poster1, author, quote, date, previous);
 			previous = date;
 		} else {
 			firebase.database().ref("posts/" + date).remove();
 		}
 
 	});
+	enablebutton("#refresh");
 }
 function showPost (likes, poster, author, quote, date, previous) {
 	if (previous === 'none') {
-		$("<div class='post'><div class='poster'></div><div class='likes'></div><div class='author'></div><div class='quote'></div><div class='date'></div></div>").appendTo("#entire_home");
+		$("<div class='post'><div class='poster1'></div><div class='likes'></div><div class='author'></div><div class='quote'></div><div class='date'></div></div><br>").appendTo("#entire_home");
 		$('.post').first().attr('id', date);
 		console.log('firstpostloaded');
+		var postid = '#' + date;
+		$(postid + ' .poster1').html(poster);
+		$(postid + ' .likes').html(likes);
+		$(postid + ' .author').html(author);
+		$(postid + ' .quote').html(quote);
+		$(postid + ' .date').html(converttime(date));
 	} else {
 		var previous1 = '#' + previous
-		$("<div class = 'post'><div class='poster'></div><div class='likes'></div><div class='author'></div><div class='quote'></div><div class='date'></div></div>").insertBefore(previous1);			
+		$("<div class = 'post'><div class='poster1'></div><div class='likes'></div><div class='author'></div><div class='quote'></div><div class='date'></div></div><br>").insertBefore(previous1);			
 		$('.post').first().attr('id', date);
 		console.log('postloaded');
+		var postid = '#' + date;
+		$(postid + ' .poster1').html(poster);
+		$(postid + ' .likes').html('Likes: ' + likes);
+		$(postid + ' .author').html(author);
+		$(postid + ' .quote').html(quote);
+		$(postid + ' .date').html(converttime(date));
 	}
 	
 }
 function newPost (auth, quote1) {
 	var database = firebase.database();
-	var current_username = $("#nav_me").html();
+	var current_username = $("#nav_me1").html();
 	var date = + new Date();
 	database.ref('posts/' + date).set({
 		poster: current_username,
@@ -78,11 +87,37 @@ function createnewpost () {
 	$("#post_error").hide();
 	var quote = $("#post_quote").val();
 	var author = $("#post_author").val();
+	if (author === '') {
+		author = "anonymous";
+	}
 	if (quote != "") {
 		newPost(author, quote);
 	} else {
 		$("#post_error").show("shake", 300);
 	}
+}
+function refreshposts (amount) {
+	disablebutton("#refresh");
+	$("#loading2").show();
+	$(".post").remove();
+	$("#entire_home").find("br").remove();
+	getPost(amount);
+}
+	
+function converttime (time) {
+	var d = new Date(time);
+	date = d.toLocaleString();
+	var date2 = date.slice(0, -6);
+	var dateindex = date.indexOf(':') + 6;
+	var date3 = date.slice(dateindex);
+	var date4 = date2 + date3
+	return date4;
+}
+function disablebutton (id) {
+	$(id).prop("disabled",true);
+}
+function enablebutton (id) {
+	$(id).prop("disabled",false);
 }
 //cool functions
 function fadeout (elem, speed) {
@@ -103,6 +138,7 @@ function login_clear () {
 	$("#login_password").val("");
 	}
 function login_open () {
+	document.title="Popular Quotes- Login"
 	$("#loading").hide();
 	var rememberedusername = Cookies.get('c1');
 	if (typeof rememberedusername === 'undefined') {
@@ -127,26 +163,50 @@ function loggedout () {
 }
 //nav functions
 function nav_clear () {
+	$("#home").hide("slide", { direction: "right" }, 200);
 	$("#entire_home").hide("slide", { direction: "right" }, 200);
 	$("#entire_post").hide("slide", { direction: "right" }, 200);
 	$("#entire_me").hide("slide", { direction: "right" }, 200);
 	$("#entire_home").hide("slide", { direction: "right" }, 200);
+	$("#entire_settings").hide("slide", { direction: "right" }, 200);
 }
 function nav_home () {
+	document.title="Popular Quotes- Home"
+	if(checkifhidden("#entire_home")) {
 	nav_clear ();
-	$("#entire_home").show("slide", {direction: "left" }, 200);
+	$("#home").show("slide", { direction: "left" }, 200);
+	$("#entire_home").show("slide", { direction: "left" }, 200);
+	} else {
+	$("html, body").animate({ scrollTop: 0 }, "fast");
+	return false;
+	}
+}
+function nav_homefirst () {
+	document.title="Popular Quotes- Home"
+	nav_clear ();
+	$("#home").show("slide", { direction: "left" }, 200);
+	$("#entire_home").show("slide", { direction: "left" }, 200);
 }
 function nav_post () {
+	document.title="Popular Quotes- Post"
 	if(checkifhidden("#entire_post")) {
 	nav_clear();
 	$("#post_error").hide();
 	$("#entire_post").show("slide", {direction: "left" }, 200);
-	} else {
-	$("#entire_post").animate({ scrollTop: 0 }, "fast");
-	return false;
+	}
+}
+function nav_settings () {
+	document.title="Popular Quotes- Settings"
+	if(checkifhidden("#entire_settings")) {
+		nav_clear();
+		$("#entire_settings").show("slide", { direction: "left" }, 200);
 	}
 }
 function checkuser () {
+	disablebutton(sign_in);
+	disablebutton(sign_up);
+	$("#wrongpass1").hide();
+	$("#wrongpass2").hide();
 	$("#wrongpass").hide();
 	$("#loading").show();
 	var username = $("#login_username").val();
@@ -169,8 +229,14 @@ function checkuser () {
 		$("#loading").hide();
 		return;
 	});
+	enablebutton(sign_in);
+	enablebutton(sign_up);
 }
 function createuser () {
+	disablebutton("#sign_in");
+	disablebutton("#sign_up");
+	$("#wrongpass1").hide();
+	$("#wrongpass2").hide();	
 	$("#wrongpass").hide();
 	$("#loading").show();
 	var username = $("#login_username").val();
@@ -181,19 +247,27 @@ function createuser () {
 	}else {
 		var login_saveuser = false;
 	}
+	if (username != "" && password1 != "") {
+		
 	var username1 = username.toLowerCase() + "@popularquotes.com";
 	firebase.auth().createUserWithEmailAndPassword(username1, password1).then(function (result) {
 		if (login_saveuser) {
 			Cookies.set('c1', username, { expires: 500 });
 			console.log(Cookies.get('c1') + 'saved!');
 		}
-		firebase.signInWithEmailAndPassword(username1, password1);
+		firebase.auth().signInWithEmailAndPassword(username1, password1);
 		$("#loading").hide();
 	}, function(error) {
 		$("#wrongpass1").show();
 		$("#loading").hide();
 		return;
 	});
+	} else {
+		$("#wrongpass2").show();
+		$("#loading").hide();
+	}
+	enablebutton("#sign_in");
+	enablebutton("#sign_up");
 }
 function firebase_signout() {
 	firebase.auth().signOut();
