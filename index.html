@@ -54,9 +54,9 @@
 						<h2 class="sign">Sign In</h2>
 					</div>
 					<form name = "auth">
-						<label>Username:</label>
+						<span id="awesomeusername"><i class="fa fa-user-o fa-fw"></i></span>
 						<input type="text" name = "login_username" placeholder="Your Username" id="login_username"/><br>
-						<label>Password:&nbsp;</label>
+						<span id="awesomepassword"><i class="fa fa-key fa-fw"></i></span>
 						<input type="password" name = "password" placeholder="Your Password" id="login_password"/><br>
 						<center>
 						<div id="entire_remember" style="position: absolute; margin-right: auto; margin-left: auto; left: 0; right: 0;">
@@ -72,9 +72,10 @@
 						<input type="button" class="green_submit" id="sign_up" value = "Sign Up" />
 
 					</form>
-					<h3 id="wrongpass" style="color: red">Invalid Username or Password</h3>
-					<h3 id="wrongpass1" style="color:red">Email already exists!</h3>
-					<h3 id="wrongpass2" style="color:red">Email/Password cannot be blank</h3>
+					<h3 id="wrongpass" style="color:red">Invalid Username or Password</h3>
+					<h3 id="wrongpass1" style="color:red">Username already exists!</h3>
+					<h3 id="wrongpass2" style="color:red">Password must be longer than 5 characters<br></h3>
+					<h3 id="wrongpass3" style="color:red">Username cannot be blank</h3>
 					<center><img src="images/loading.gif" id="loading" width="20%" height="20%" /></center>
 				</div>
 		</div> 
@@ -95,6 +96,7 @@
 			<span id="post_error" style="color: red">Quote cannot be empty!</span><br>
 			<input type="button" id="post" value="Post!" />
 			</form>
+			<div id="postload"><center><img src="images/loading2.gif" /></center></div>
 	</div>
 	<div id="entire_settings">
 	<br><br><br>

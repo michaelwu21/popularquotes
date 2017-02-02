@@ -6,7 +6,7 @@ function loaded () {
 		nav_homefirst();
 		clearInterval(interval);
 		console.log("page loaded")
-		var accheight = $("#nav").innerHeight() + 10;
+		var accheight = $("#nav").innerHeight() + 9;
 		var accwidth = $("#nav_me").width();
 		$(".dropdown").css("margin-top", accheight);
 		$(".dropdown").css("width", accwidth);
@@ -48,18 +48,18 @@ function getPost (number) {
 }
 function showPost (likes, poster, author, quote, date, previous) {
 	if (previous === 'none') {
-		$("<div class='post'><div class='poster1'></div><div class='likes'></div><div class='author'></div><div class='quote'></div><div class='date'></div></div><br>").appendTo("#entire_home");
+		$("<span class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><div class='quote'></div><br><div class='date'></div></span><br><br>").appendTo("#entire_home");
 		$('.post').first().attr('id', date);
 		console.log('firstpostloaded');
 		var postid = '#' + date;
 		$(postid + ' .poster1').html(poster);
-		$(postid + ' .likes').html(likes);
+		$(postid + ' .likes').html('Likes:' + likes);
 		$(postid + ' .author').html(author);
 		$(postid + ' .quote').html(quote);
 		$(postid + ' .date').html(converttime(date));
 	} else {
 		var previous1 = '#' + previous
-		$("<div class = 'post'><div class='poster1'></div><div class='likes'></div><div class='author'></div><div class='quote'></div><div class='date'></div></div><br>").insertBefore(previous1);			
+		$("<span class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><div class='quote'></div><br><div class='date'></div></span><br><br>").insertBefore(previous1);			
 		$('.post').first().attr('id', date);
 		console.log('postloaded');
 		var postid = '#' + date;
@@ -88,7 +88,7 @@ function createnewpost () {
 	var quote = $("#post_quote").val();
 	var author = $("#post_author").val();
 	if (author === '') {
-		author = "anonymous";
+		author = "Anonymous";
 	}
 	if (quote != "") {
 		newPost(author, quote);
@@ -226,6 +226,7 @@ function nav_settings () {
 function checkuser () {
 	disablebutton(sign_in);
 	disablebutton(sign_up);
+	$("#wrongpass3").hide();
 	$("#wrongpass1").hide();
 	$("#wrongpass2").hide();
 	$("#wrongpass").hide();
@@ -256,6 +257,7 @@ function checkuser () {
 function createuser () {
 	disablebutton("#sign_in");
 	disablebutton("#sign_up");
+	$("#wrongpass3").hide();
 	$("#wrongpass1").hide();
 	$("#wrongpass2").hide();	
 	$("#wrongpass").hide();
@@ -268,7 +270,7 @@ function createuser () {
 	}else {
 		var login_saveuser = false;
 	}
-	if (username != "" && password1 != "") {
+	if (username != "" && password1.length > 5) {
 		
 	var username1 = username.toLowerCase() + "@popularquotes.com";
 	firebase.auth().createUserWithEmailAndPassword(username1, password1).then(function (result) {
@@ -276,7 +278,6 @@ function createuser () {
 			Cookies.set('c1', username, { expires: 500 });
 			console.log(Cookies.get('c1') + 'saved!');
 		}
-		firebase.auth().signInWithEmailAndPassword(username1, password1);
 		$("#loading").hide();
 	}, function(error) {
 		$("#wrongpass1").show();
@@ -284,7 +285,12 @@ function createuser () {
 		return;
 	});
 	} else {
-		$("#wrongpass2").show();
+		if (username === "") {
+			$("#wrongpass3").show();
+		}
+		if (password1.length <= 5) {
+			$("#wrongpass2").show();
+		}
 		$("#loading").hide();
 	}
 	enablebutton("#sign_in");
