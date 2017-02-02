@@ -53,7 +53,7 @@ function showPost (likes, poster, author, quote, date, previous) {
 		console.log('firstpostloaded');
 		var postid = '#' + date;
 		$(postid + ' .poster1').html(poster);
-		$(postid + ' .likes').html('Likes:' + likes);
+		$(postid + ' .likes').html('Likes: ' + likes);
 		$(postid + ' .author').html(author);
 		$(postid + ' .quote').html(quote);
 		$(postid + ' .date').html(converttime(date));
