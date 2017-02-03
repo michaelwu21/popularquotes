@@ -43,7 +43,18 @@ $(function() {
 		  }
 			  
 	  })
-}());	
+	  
+	  
+	
+}());
+//prevent console use
+(function () {
+  Object.getOwnPropertyNames(console).filter(function(property) {
+     return typeof console[property] == 'function';
+  }).forEach(function (verb) {
+     console[verb] =function(){return 'Sorry, for security reasons...';};
+  });
+}());
 //sign in
 	
 	//close login
@@ -66,6 +77,9 @@ $(function() {
 	})
 	$("#nav_settings").click(function () {
 		nav_settings();
+	});
+	$("#nav_calc").click(function () {
+		nav_calculator();
 	});
 	$("#delete_acc").click(function () {
 		firebase.auth().currentUser.delete();
@@ -127,5 +141,12 @@ $(function() {
 	});
 	$("#refresh").click(function () {
 		refreshposts(50);
+	});
+	$(".fa-bars").click(function () {
+	   if (checkifhidden("#nav_bar")) {
+		  $("#nav_bar").fadeIn();
+	   } else {
+		  $("#nav_bar").fadeOut();
+	   }
 	});
 });

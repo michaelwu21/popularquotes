@@ -1,17 +1,16 @@
 function loaded () {
 	$("#nav_me").hide();
 	if($(".pace-inactive").css('display') == 'none'){
-		$("#website").show('scale', 200);
+		getPost(50);
 		var loaded = true;
 		nav_homefirst();
 		clearInterval(interval);
-		console.log("page loaded")
-		var accheight = $("#nav").innerHeight() + 9;
 		var accwidth = $("#nav_me").width();
-		$(".dropdown").css("margin-top", accheight);
 		$(".dropdown").css("width", accwidth);
 		removejscssfile("dataurl.css", "css");
-		getPost(50);
+		$("#website").show('scale', 200);
+		/*var barspos = $("#nav_home").outerHeight() * 0.2;
+		$("#nav_switch").css("top", barspos);*/
 	}
 }	
 //remove js and css of load screen to remove loading bug
@@ -48,24 +47,22 @@ function getPost (number) {
 }
 function showPost (likes, poster, author, quote, date, previous) {
 	if (previous === 'none') {
-		$("<span class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><div class='quote'></div><br><div class='date'></div></span><br><br>").appendTo("#entire_home");
+		$("<center><div class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><div class='quote'></div><br><div class='date'></div></div></center><br><br>").appendTo("#entire_home");
 		$('.post').first().attr('id', date);
-		console.log('firstpostloaded');
 		var postid = '#' + date;
 		$(postid + ' .poster1').html(poster);
-		$(postid + ' .likes').html('Likes: ' + likes);
-		$(postid + ' .author').html(author);
+		$(postid + ' .likes').html("<i class='fa fa-heart-o fa-lg'></i>&nbsp;&nbsp;" + likes);
+		$(postid + ' .author').html('Author: ' + author);
 		$(postid + ' .quote').html(quote);
 		$(postid + ' .date').html(converttime(date));
 	} else {
 		var previous1 = '#' + previous
 		$("<span class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><div class='quote'></div><br><div class='date'></div></span><br><br>").insertBefore(previous1);			
 		$('.post').first().attr('id', date);
-		console.log('postloaded');
 		var postid = '#' + date;
 		$(postid + ' .poster1').html(poster);
-		$(postid + ' .likes').html('Likes: ' + likes);
-		$(postid + ' .author').html(author);
+		$(postid + ' .likes').html("<i class='fa fa-heart-o fa-lg'></i>" + likes);
+		$(postid + ' .author').html('Author: ' + author);
 		$(postid + ' .quote').html(quote);
 		$(postid + ' .date').html(converttime(date));
 	}
@@ -145,7 +142,6 @@ function login_open () {
 		$("#entire_forget").hide();
 		$("#entire_remember").show();
 	} else {
-		console.log(rememberedusername);
 		$("#login_username").val(rememberedusername);
 		$("#entire_forget").show();
 		$("#entire_remember").hide();
@@ -169,6 +165,7 @@ function nav_clear () {
 	$("#entire_me").hide("slide", { direction: "right" }, 200);
 	$("#entire_home").hide("slide", { direction: "right" }, 200);
 	$("#entire_settings").hide("slide", { direction: "right" }, 200);
+	$("#entire_calculator").hide("slide", { direction: "right" }, 200);
 }
 function nav_home () {
 	document.title="QuoteSharer - Home"
@@ -211,9 +208,9 @@ function nav_homefirst () {
 function nav_post () {
 	document.title="QuoteSharer - Post"
 	if(checkifhidden("#entire_post")) {
-	nav_clear();
-	$("#post_error").hide();
-	$("#entire_post").show("slide", {direction: "left" }, 200);
+		nav_clear();
+		$("#post_error").hide();
+		$("#entire_post").show("slide", {direction: "left" }, 200);
 	}
 }
 function nav_settings () {
@@ -221,6 +218,12 @@ function nav_settings () {
 	if(checkifhidden("#entire_settings")) {
 		nav_clear();
 		$("#entire_settings").show("slide", { direction: "left" }, 200);
+	}
+}
+function nav_calculator () {
+	if(checkifhidden("#entire_calculator")) {
+		nav_clear();
+		$("#entire_calculator").show("slide", {direction: "left" }, 200);
 	}
 }
 function checkuser () {
@@ -235,7 +238,6 @@ function checkuser () {
 	var password1 = $("#login_password").val();
 	if($("#remember_acc").is(':checked')){
 		var login_saveuser = true;
-		console.log("saving username...");
 	}else {
 		var login_saveuser = false;
 	}
@@ -243,7 +245,6 @@ function checkuser () {
 	firebase.auth().signInWithEmailAndPassword(username1, password1).then(function(result) {
 		if (login_saveuser) {
 			Cookies.set('c1', username, { expires: 500 });
-			console.log(Cookies.get('c1') + 'saved!');
 		}
 		$("#loading").hide();
 	}, function(error) {
@@ -266,7 +267,6 @@ function createuser () {
 	var password1 = $("#login_password").val();
 	if($("#remember_acc").is(':checked')){
 		var login_saveuser = true;
-		console.log("saving username...");
 	}else {
 		var login_saveuser = false;
 	}
@@ -276,7 +276,6 @@ function createuser () {
 	firebase.auth().createUserWithEmailAndPassword(username1, password1).then(function (result) {
 		if (login_saveuser) {
 			Cookies.set('c1', username, { expires: 500 });
-			console.log(Cookies.get('c1') + 'saved!');
 		}
 		$("#loading").hide();
 	}, function(error) {

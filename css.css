@@ -1,5 +1,7 @@
 body, html {
 	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
 }
 /*login stuff*/
 #login {
@@ -180,19 +182,24 @@ textarea {
 	background-color: green;
 }
 .post {
-	display: inline-block!important;
+	display: block!important;
+	position: relative;
+	border-style: solid;
+	background-color: #e0e2e5;
 }
 .poster1 {
-	border-style: solid;
 	float: left;
-	position: relative;
-	right: 40%;
+	margin: 10px 0 0 15px;
 	text-transform: capitalize;
 }
 .likes {
 	float: right;
 	position: relative;
 	left: 40%;
+}
+.author {
+	text-align: center;
+	margin-left:
 }
 #entire_home {
 	margin-top: 70px;

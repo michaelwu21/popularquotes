@@ -5,10 +5,11 @@ ul {
 	margin: 0;
     overflow: hidden;
     background-color: #9adcf4;
-    top: 10px!important;
-    width: 98%;
+	top: 0%;
+    width: 100%;
     border: none;
-    border-radius: 5px;
+	z-index: 100;
+	height: auto;
 }
 
 
@@ -30,11 +31,14 @@ li a, .me {
 /*li {
 	float:left;
 }*/
-
+#nav_bar {
+	display: block;
+}
 #nav_home, #nav_post {
 	float: left;
 }
 #nav_home {
+	margin-left: 52px;
 	padding-left: 50px;
 	padding-right: 50px;
 }
@@ -46,6 +50,11 @@ li a, .me {
     cursor: pointer;
     color: white!important;
     transition: background-color 0.3s, color 0.5s;
+}
+.fa-bars:hover {
+	color: #d4d6d8;
+	cursor: pointer;
+	transition: color 0.3s;
 }
 #nav_login {
 	background-color: #0fdd20; 
@@ -175,4 +184,17 @@ li a, .me {
 }
 .importantoverflow {
 	overflow: visible!important;
+}
+#nav_nav {
+	display: block!important;
+	visibility: visibile!important;
+}
+#nav_switch {
+	display: block;
+	top: 0;
+	height: auto;
+	width: auto;
+	padding: 17px;
+	position: fixed;
+	z-index: 200;
 }
