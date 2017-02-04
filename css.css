@@ -175,17 +175,24 @@ textarea {
 	padding: 20px 50px;
 	background-color: lime;
 	border-radius: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 #post:hover {
 	color: white;
 	cursor: pointer;
 	background-color: green;
+	box-shadow: none;
 }
 .post {
 	display: block!important;
 	position: relative;
 	border-style: solid;
 	background-color: #e0e2e5;
+	width: 60%;
+	height: auto;
+    margin: 0 auto;
+    padding: 5px;
+	border-radius: 10px;
 }
 .poster1 {
 	float: left;
@@ -198,8 +205,15 @@ textarea {
 	left: 40%;
 }
 .author {
+	position: absolute;
+	width: 100%;
 	text-align: center;
-	margin-left:
+	margin: 0;
+	padding: 0;
+}
+.quote {
+	max-width: 700px;
+	word-wrap: break-word;
 }
 #entire_home {
 	margin-top: 70px;
@@ -219,6 +233,7 @@ textarea {
 	background-color: cyan;
 	position: fixed;
 	border-radius: 4px;
+	z-index: 100;
 }
 #refresh:hover {
 	cursor: pointer;

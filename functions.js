@@ -47,24 +47,24 @@ function getPost (number) {
 }
 function showPost (likes, poster, author, quote, date, previous) {
 	if (previous === 'none') {
-		$("<center><div class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><div class='quote'></div><br><div class='date'></div></div></center><br><br>").appendTo("#entire_home");
+		$("<div class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><br><div class='quote'></div><br><div class='date'></div></div><br><br>").appendTo("#entire_home");
 		$('.post').first().attr('id', date);
 		var postid = '#' + date;
 		$(postid + ' .poster1').html(poster);
 		$(postid + ' .likes').html("<i class='fa fa-heart-o fa-lg'></i>&nbsp;&nbsp;" + likes);
 		$(postid + ' .author').html('Author: ' + author);
 		$(postid + ' .quote').html(quote);
-		$(postid + ' .date').html(converttime(date));
+		$(postid + ' .date').html('Posted: ' + converttime(date));
 	} else {
 		var previous1 = '#' + previous
-		$("<span class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><div class='quote'></div><br><div class='date'></div></span><br><br>").insertBefore(previous1);			
+		$("<span class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><br><div class='quote'></div><br><div class='date'></div></span><br><br>").insertBefore(previous1);			
 		$('.post').first().attr('id', date);
 		var postid = '#' + date;
 		$(postid + ' .poster1').html(poster);
 		$(postid + ' .likes').html("<i class='fa fa-heart-o fa-lg'></i>" + likes);
 		$(postid + ' .author').html('Author: ' + author);
 		$(postid + ' .quote').html(quote);
-		$(postid + ' .date').html(converttime(date));
+		$(postid + ' .date').html('Posted: ' + converttime(date));
 	}
 	
 }
@@ -78,6 +78,12 @@ function newPost (auth, quote1) {
 		author: auth,
 		quote: quote1,
 		likes: 0
+	}).then(function(result) {
+		$("#nav_posterror").hide();
+		$("#nav_posted").show( "bounce", 500).fadeOut(1500);
+	}, function(error) {
+		$("#nav_posted").hide();
+		$("#nav_posterror").show( "bounce", 500).fadeOut(1500);		
 	});
 	}
 function createnewpost () {
