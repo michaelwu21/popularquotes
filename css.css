@@ -196,7 +196,7 @@ textarea {
 }
 .poster1 {
 	float: left;
-	margin: 10px 0 0 15px;
+	margin: 5px 0 0 15px;
 	text-transform: capitalize;
 }
 .likes {
@@ -216,7 +216,7 @@ textarea {
 	word-wrap: break-word;
 }
 #entire_home {
-	margin-top: 70px;
+	padding-top: 80px;
 	width: 100%;
 	height: auto;
 	min-height: 90%;
@@ -244,4 +244,43 @@ textarea {
 }
 i::before{
     background:transparent;
+}
+.background {
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+	top: 0!important;
+	margin: 0!important;
+	width: 100%;
+	z-index: -1;
+    background-size: cover
+}
+.background_hide {
+	background-image: none!important;
+}
+#upload_profile_pic {
+	display: block;
+	margin: 0 auto;
+	padding-left: 60px;
+}
+#settings_pic, #settings_background {
+	width: 50%;
+	background-color: #93f2c7;
+	padding: 10px 0 15px 0;
+	border: none;
+	border-radius: 8px;
+	overflow: hidden;
+}
+.background_select {
+	width: 200px;
+	height: auto;
+	display: inline-block;
+	margin: 7px;
+}
+.background_select:hover {
+	cursor: pointer;
+}
+#background_select-container {
+	display: block;
+	margin: 0 auto;
+	width: 90%;
 }

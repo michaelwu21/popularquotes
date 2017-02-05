@@ -19,7 +19,8 @@
 	<link rel="icon" type="image/png" href="favicon-16x16.png?v=XBrexqJljw" sizes="16x16">
 	<link rel="manifest" href="manifest.json?v=XBrexqJljw">
 	<link rel="mask-icon" href="safari-pinned-tab.svg?v=XBrexqJljw" color="#5bbad5">
-	<link rel="shortcut icon" href="favicon.ico?v=XBrexqJljw">
+	<script src='spectrum.js'></script>
+	<link rel='stylesheet' href='spectrum.css' />
 	<meta name="theme-color" content="#ffffff">
 </head>	
 <body>
@@ -114,7 +115,27 @@
 			<div id="postload"><center><img src="images/loading2.gif" /></center></div>
 	</div>
 	<div id="entire_settings">
-	<br><br><br>
+	<br><br><br><br>
+	<div id="settings_pic">
+		<h3>Upload Profile Picture&nbsp;<i class="fa fa-upload"></i></h3>
+		<input type="file"id="upload_profile_pic" accept=".png,.jpg,.jpeg,.bmp"	/>
+		<button id="select_profile_pic">Save</button>
+	</div>
+	<br><br>
+	<div id="settings_background">
+		<h3>Change Background Picture&nbsp;<i class="fa fa-picture-o"></i></h3>
+		<div id="background_select-container">
+			<img src="background/1.jpg" class="background_select" />
+			<img src="background/2.jpg" class="background_select" />
+			<img src="background/3.jpg" class="background_select" />
+			<img src="background/4.jpg" class="background_select" />
+			<img src="background/5.jpeg" class="background_select" />
+			<img src="background/6.jpeg" class="background_select" />
+			<img src="background/7.jpeg" class="background_select" />
+			<img src="background/8.jpg" class="background_select" />
+			<img src="background/9.jpeg" class="background_select" />
+		</div>
+	</div>
 	<h1 id="delete_acc" style="color: red">Delete Account</h1>
 	</div>
 <div id="entire_calculator">

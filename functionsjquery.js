@@ -17,6 +17,7 @@ $(function() {
 	  var database = firebase.database();
 	  firebase.auth().onAuthStateChanged(function(user) {
 		  if (user) {
+			  $("#nav_bar").fadeIn();
 			  document.title="QuoteSharer - Home"
 			  $("#nav_login").hide();
 			  $("#nav_me").show();
@@ -27,10 +28,12 @@ $(function() {
 			  var current_username = current_user.slice(0, atposition);
 			  $("#nav_me1").html(current_username);
 			  $("#nav_me1").addClass("me");
+			  get_background_pic();
 			  login_close();
 			  loggedin();
 
 		  } else {
+			  $("#nav_bar").fadeIn();
 			  $("#nav_me").hide();
 			  $("#nav_signout").hide();
 			  $("#nav_login").show();
@@ -48,13 +51,13 @@ $(function() {
 	
 }());
 //prevent console use
-(function () {
+/*(function () {
   Object.getOwnPropertyNames(console).filter(function(property) {
      return typeof console[property] == 'function';
   }).forEach(function (verb) {
      console[verb] =function(){return 'Sorry, for security reasons...';};
   });
-}());
+}());*/
 //sign in
 	
 	//close login

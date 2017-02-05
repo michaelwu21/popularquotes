@@ -47,7 +47,7 @@ function getPost (number) {
 }
 function showPost (likes, poster, author, quote, date, previous) {
 	if (previous === 'none') {
-		$("<div class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><br><div class='quote'></div><br><div class='date'></div></div><br><br>").appendTo("#entire_home");
+		$("<div class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><br><br><div class='quote'></div><br><div class='date'></div></div><br><br>").appendTo("#entire_home");
 		$('.post').first().attr('id', date);
 		var postid = '#' + date;
 		$(postid + ' .poster1').html(poster);
@@ -57,7 +57,7 @@ function showPost (likes, poster, author, quote, date, previous) {
 		$(postid + ' .date').html('Posted: ' + converttime(date));
 	} else {
 		var previous1 = '#' + previous
-		$("<span class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><br><div class='quote'></div><br><div class='date'></div></span><br><br>").insertBefore(previous1);			
+		$("<span class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><br><br><div class='quote'></div><br><div class='date'></div></span><br><br>").insertBefore(previous1);			
 		$('.post').first().attr('id', date);
 		var postid = '#' + date;
 		$(postid + ' .poster1').html(poster);
@@ -116,6 +116,64 @@ function converttime (time) {
 	var date4 = date2 + date3
 	return date4;
 }
+function get_background_pic () {
+	var username = 	$("#nav_me1").html();
+	var username1 = username + "_background"
+    firebase.database().ref().on('value', function(snapshot) {
+        if (!snapshot.hasChild(username1)) {
+			console.log("No background picture set");
+			return false;
+        }
+        else {
+            firebase.database().ref(username1).on('value', function (snapshot) {
+				var number = snapshot.val();
+				set_background_pic(number);
+        });
+		}
+    });
+}
+function set_background_pic (number) {
+	switch(number) {
+		case 1:
+		console.log(number);
+		$("body").css('background-image', 'url(' + "background/1.jpg" + ')');
+		$("body").addClass("background");
+		break;
+		case 2:
+		$("body").css('background-image', 'url(' + "background/2.jpg" + ')');
+		$("body").addClass("background");
+		break;
+		case 3:
+		$("body").css('background-image', 'url(' + "background/3.jpg" + ')');
+		$("body").addClass("background");
+		break;
+		case 4:
+		$("body").css('background-image', 'url(' + "background/4.jpg" + ')');
+		$("body").addClass("background");
+		break;
+		case 5:
+		$("body").css('background-image', 'url(' + "background/5.jpeg" + ')');
+		$("body").addClass("background");
+		break;
+		case 6:
+		$("body").css('background-image', 'url(' + "background/6.jpeg" + ')');
+		$("body").addClass("background");
+		break;
+		case 7:
+		$("body").css('background-image', 'url(' + "background/7.jpeg" + ')');
+		$("body").addClass("background");
+		break;
+		case 8:
+		$("body").css('background-image', 'url(' + "background/8.jpg" + ')');
+		$("body").addClass("background");
+		break;
+		case 9:
+		$("#website").css('background-image', 'url(' + "background/9.jpeg" + ')');
+		$("#website").addClass("background");
+		break;
+	}
+		
+}
 function disablebutton (id) {
 	$(id).prop("disabled",true);
 }
@@ -164,7 +222,7 @@ function loggedout () {
 	$("#nav_loggedout").show( "bounce", 500).fadeOut(1500);
 }
 //nav functions
-function nav_clear () {
+function nav_clear (value) {
 	$("#home").hide("slide", { direction: "right" }, 200);
 	$("#entire_home").hide("slide", { direction: "right" }, 200);
 	$("#entire_post").hide("slide", { direction: "right" }, 200);
@@ -172,22 +230,26 @@ function nav_clear () {
 	$("#entire_home").hide("slide", { direction: "right" }, 200);
 	$("#entire_settings").hide("slide", { direction: "right" }, 200);
 	$("#entire_calculator").hide("slide", { direction: "right" }, 200);
+	if (value != "no") {
+	$("body").addClass("background_hide");
+	};
 }
 function nav_home () {
 	document.title="QuoteSharer - Home"
 	if(checkifhidden("#entire_home")) {
-	nav_clear ();
+	nav_clear ("");
 	$("#home").show("slide", { direction: "left" }, 200);
 	$("#entire_home").show("slide", { direction: "left" }, 200);
+	$("#website").removeClass("background_hide");
 	} else {
 	$("html, body").animate({ scrollTop: 0 }, "fast");
 	return false;
 	}
 }
 function nav_homefirst () {
+	nav_clear ("no");
 	document.title="QuoteSharer - Home"
 	var user = firebase.auth().currentUser;
-
 	if (user) {
 		
 		$("#nav_login").hide();
@@ -207,14 +269,15 @@ function nav_homefirst () {
 		  $("#nav_post").hide();
 		  $("#nav_loggedout").hide();
 	}
-	nav_clear ();
 	$("#home").show("slide", { direction: "left" }, 200);
 	$("#entire_home").show("slide", { direction: "left" }, 200);
+	$("#website").removeClass("background_hide");
+	$("#website").addClass("background");
 }
 function nav_post () {
 	document.title="QuoteSharer - Post"
 	if(checkifhidden("#entire_post")) {
-		nav_clear();
+		nav_clear("");
 		$("#post_error").hide();
 		$("#entire_post").show("slide", {direction: "left" }, 200);
 	}
@@ -222,13 +285,13 @@ function nav_post () {
 function nav_settings () {
 	document.title="QuoteSharer - Settings"
 	if(checkifhidden("#entire_settings")) {
-		nav_clear();
+		nav_clear("");
 		$("#entire_settings").show("slide", { direction: "left" }, 200);
 	}
 }
 function nav_calculator () {
 	if(checkifhidden("#entire_calculator")) {
-		nav_clear();
+		nav_clear("");
 		$("#entire_calculator").show("slide", {direction: "left" }, 200);
 	}
 }
@@ -282,7 +345,9 @@ function createuser () {
 	firebase.auth().createUserWithEmailAndPassword(username1, password1).then(function (result) {
 		if (login_saveuser) {
 			Cookies.set('c1', username, { expires: 500 });
-		}
+		};
+		var usernametosave = username.toLowerCase();
+		firebase.database().ref(usernametosave + '_background').set(8);
 		$("#loading").hide();
 	}, function(error) {
 		$("#wrongpass1").show();
