@@ -42,7 +42,8 @@ $(function() {
 			  loggedout();
 			  var firsttime21 = true;
 			  }
-			  nav_home();
+			 nav_home("");
+			$("body").css('background-image', 'none');
 		  }
 			  
 	  })
@@ -151,6 +152,11 @@ $(function() {
 	   } else {
 		  $("#nav_bar").fadeOut();
 	   }
+	});
+	$(".background_select").click(function () {
+		var num = $(this).attr('id');
+		settings_change_background(num);
+		get_background_pic();
 	});
 });
 

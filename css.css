@@ -250,9 +250,8 @@ i::before{
     background-attachment: fixed;
 	top: 0!important;
 	margin: 0!important;
-	width: 100%;
 	z-index: -1;
-    background-size: cover
+    background-size: 100%;
 }
 .background_hide {
 	background-image: none!important;
@@ -275,6 +274,10 @@ i::before{
 	height: auto;
 	display: inline-block;
 	margin: 7px;
+	border-width: 3px;
+	border-style: solid;
+	border: transparent;
+	border-style: solid;
 }
 .background_select:hover {
 	cursor: pointer;
@@ -283,4 +286,7 @@ i::before{
 	display: block;
 	margin: 0 auto;
 	width: 90%;
+}
+.settings_pic_selected {
+	border-color: yellow;
 }

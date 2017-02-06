@@ -138,41 +138,68 @@ function set_background_pic (number) {
 		console.log(number);
 		$("body").css('background-image', 'url(' + "background/1.jpg" + ')');
 		$("body").addClass("background");
+		settings_pic_clear();
+		$("#pic1").addClass("settings_pic_selected");
 		break;
 		case 2:
 		$("body").css('background-image', 'url(' + "background/2.jpg" + ')');
 		$("body").addClass("background");
+		settings_pic_clear();
+		$("#pic2").addClass("settings_pic_selected");
 		break;
 		case 3:
 		$("body").css('background-image', 'url(' + "background/3.jpg" + ')');
 		$("body").addClass("background");
+		settings_pic_clear();
+		$("#pic3").addClass("settings_pic_selected");
 		break;
 		case 4:
 		$("body").css('background-image', 'url(' + "background/4.jpg" + ')');
 		$("body").addClass("background");
+		settings_pic_clear();
+		$("#pic4").addClass("settings_pic_selected");
 		break;
 		case 5:
 		$("body").css('background-image', 'url(' + "background/5.jpeg" + ')');
 		$("body").addClass("background");
+		settings_pic_clear();
+		$("#pic5").addClass("settings_pic_selected");
 		break;
 		case 6:
 		$("body").css('background-image', 'url(' + "background/6.jpeg" + ')');
 		$("body").addClass("background");
+		settings_pic_clear();
+		$("#pic6").addClass("settings_pic_selected");
 		break;
 		case 7:
 		$("body").css('background-image', 'url(' + "background/7.jpeg" + ')');
 		$("body").addClass("background");
+		settings_pic_clear();
+		$("#pic7").addClass("settings_pic_selected");
 		break;
 		case 8:
 		$("body").css('background-image', 'url(' + "background/8.jpg" + ')');
 		$("body").addClass("background");
+		settings_pic_clear();
+		$("#pic8").addClass("settings_pic_selected");
 		break;
 		case 9:
-		$("#website").css('background-image', 'url(' + "background/9.jpeg" + ')');
-		$("#website").addClass("background");
+		$("body").css('background-image', 'url(' + "background/9.jpeg" + ')');
+		$("body").addClass("background");
+		settings_pic_clear();
+		$("#pic9").addClass("settings_pic_selected");
 		break;
 	}
 		
+}
+function settings_pic_clear () {
+	$("#background_select-container .background_select").removeClass("settings_pic_selected");
+}
+function settings_change_background (number) {
+	var numberpos = number.indexOf("c") + 1;
+	var number1 = Number(number.slice(numberpos));
+	var username = $("#nav_me1").html();
+	firebase.database().ref(username + "_background").set(number1);
 }
 function disablebutton (id) {
 	$(id).prop("disabled",true);
@@ -223,16 +250,15 @@ function loggedout () {
 }
 //nav functions
 function nav_clear (value) {
-	$("#home").hide("slide", { direction: "right" }, 200);
-	$("#entire_home").hide("slide", { direction: "right" }, 200);
 	$("#entire_post").hide("slide", { direction: "right" }, 200);
 	$("#entire_me").hide("slide", { direction: "right" }, 200);
-	$("#entire_home").hide("slide", { direction: "right" }, 200);
 	$("#entire_settings").hide("slide", { direction: "right" }, 200);
 	$("#entire_calculator").hide("slide", { direction: "right" }, 200);
 	if (value != "no") {
+	$("#home").hide("slide", { direction: "right" }, 200);
+	$("#entire_home").hide("slide", { direction: "right" }, 200);
 	$("body").addClass("background_hide");
-	};
+	}
 }
 function nav_home () {
 	document.title="QuoteSharer - Home"
@@ -240,7 +266,7 @@ function nav_home () {
 	nav_clear ("");
 	$("#home").show("slide", { direction: "left" }, 200);
 	$("#entire_home").show("slide", { direction: "left" }, 200);
-	$("#website").removeClass("background_hide");
+	$("body").removeClass("background_hide");
 	} else {
 	$("html, body").animate({ scrollTop: 0 }, "fast");
 	return false;
@@ -269,10 +295,10 @@ function nav_homefirst () {
 		  $("#nav_post").hide();
 		  $("#nav_loggedout").hide();
 	}
-	$("#home").show("slide", { direction: "left" }, 200);
-	$("#entire_home").show("slide", { direction: "left" }, 200);
-	$("#website").removeClass("background_hide");
-	$("#website").addClass("background");
+	$("#home").show();
+	$("#entire_home").show();
+	$("body").removeClass("background_hide");
+	$("body").addClass("background");
 }
 function nav_post () {
 	document.title="QuoteSharer - Post"
