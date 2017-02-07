@@ -68,6 +68,7 @@ function showPost (likes, poster, author, quote, date, previous) {
 	}
 	
 }
+/*
 function newPost (auth, quote1) {
 	var database = firebase.database();
 	var current_username = $("#nav_me1").html();
@@ -86,6 +87,7 @@ function newPost (auth, quote1) {
 		$("#nav_posterror").show( "bounce", 500).fadeOut(1500);		
 	});
 	}
+*/
 function createnewpost () {
 	$("#post_error").hide();
 	var quote = $("#post_quote").val();
