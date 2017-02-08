@@ -68,7 +68,7 @@ function showPost (likes, poster, author, quote, date, previous) {
 	}
 	
 }
-/*
+
 function newPost (auth, quote1) {
 	var database = firebase.database();
 	var current_username = $("#nav_me1").html();
@@ -87,7 +87,7 @@ function newPost (auth, quote1) {
 		$("#nav_posterror").show( "bounce", 500).fadeOut(1500);		
 	});
 	}
-*/
+
 function createnewpost () {
 	$("#post_error").hide();
 	var quote = $("#post_quote").val();
@@ -352,7 +352,7 @@ function checkuser () {
 	enablebutton(sign_in);
 	enablebutton(sign_up);
 }
-function createuser () {
+/*function createuser () {
 	disablebutton("#sign_in");
 	disablebutton("#sign_up");
 	$("#wrongpass3").hide();
@@ -393,7 +393,7 @@ function createuser () {
 	}
 	enablebutton("#sign_in");
 	enablebutton("#sign_up");
-}
+}*/
 function firebase_signout() {
 	firebase.auth().signOut();
 }
