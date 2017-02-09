@@ -86,7 +86,11 @@ $(function() {
 		nav_calculator();
 	});
 	$("#delete_acc").click(function () {
-		firebase.auth().currentUser.delete();
+		if (checkauth()) {
+			firebase.auth().currentUser.delete()
+		} else {
+			fail();
+		}
 	});
 	$("#remember_acc2").click(function() {
 		$("#remember_acc3").slideToggle();
@@ -98,6 +102,7 @@ $(function() {
 	//submit on enter key as well
 	$("#login").keypress(function(e) {
     if(e.which == 13) {
+		$("#sign_in").addClass("clicked");
         checkuser();
     }
 	});
@@ -156,7 +161,24 @@ $(function() {
 	$(".background_select").click(function () {
 		var num = $(this).attr('id');
 		settings_change_background(num);
-		get_background_pic();
+	});
+	$(".btn-style").click(function () {
+		var buttonpressed = $(this).html();
+		var backspace = Number(buttonpressed.charCodeAt(0).toString(16));
+		if (backspace === 2190 ) {
+			removenum();
+		} else {
+			addnum(buttonpressed);
+		}
+	});
+	$("#eqn-bg").click(function () {
+		mathcalc();
+	});
+	$(".del-bg").click(function () {
+		removeallnum();
+	});
+	$(".zero").click(function () {
+		addzero();
 	});
 });
 

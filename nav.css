@@ -73,7 +73,7 @@ li a, .me {
 	background-color: red;
 }
 	
-#nav_loggedin, #nav_loggedout, #nav_posted, #nav_posterror {
+#nav_loggedin, #nav_loggedout, #nav_posted, #nav_posterror, #nav_notloggedin {
 	float:none;
 	overflow: hidden;
 	display: none;
@@ -81,7 +81,7 @@ li a, .me {
 #nav_loggedin, #nav_posted {
 	background-color: lime;
 }
-#nav_loggedout, #nav_posterror {
+#nav_loggedout, #nav_posterror, #nav_notloggedin {
 	background-color: red;
 }
 #nav_signout {
@@ -106,7 +106,7 @@ li a, .me {
 
     /* Styles */
     background: yellow;
-    border-radius: 5px;
+    border-radius: 0;
     box-shadow: 0 1px 0 rgba(0,0,0,0.2);
     cursor: pointer;
     outline: none;
@@ -134,7 +134,7 @@ li a, .me {
 
     /* Styles */
     background: #fff;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0;
     border: 1px solid rgba(0,0,0,0.2);
     border-top: none;
     border-bottom: none;
@@ -171,7 +171,7 @@ li a, .me {
     color: #57a9d9;
 }
 .wrapper-dropdown-5.active {
-    border-radius: 5px 5px 0 0;
+    border-radius: 0;
     background: orange;
     box-shadow: none;
     border-bottom: none;

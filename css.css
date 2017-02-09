@@ -72,7 +72,13 @@ body, html {
 .green_submit:hover, .white_submit:hover {
 	cursor: pointer;
 	background-color: #e0e1e2;
+	box-shadow: none;
 }
+.clicked {
+	background-color: #e0e1e2;
+	box-shadow: none;
+}
+
 input [type=button], [type=submit] {
 	outline: none;
 }
@@ -201,8 +207,7 @@ textarea {
 }
 .likes {
 	float: right;
-	position: relative;
-	left: 40%;
+	margin: 5px 15px 0 0;
 }
 .author {
 	position: absolute;
@@ -262,7 +267,7 @@ i::before{
 	padding-left: 60px;
 }
 #settings_pic, #settings_background {
-	width: 50%;
+	width: 60%;
 	background-color: #93f2c7;
 	padding: 10px 0 15px 0;
 	border: none;

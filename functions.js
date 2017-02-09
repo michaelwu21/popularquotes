@@ -61,14 +61,13 @@ function showPost (likes, poster, author, quote, date, previous) {
 		$('.post').first().attr('id', date);
 		var postid = '#' + date;
 		$(postid + ' .poster1').html(poster);
-		$(postid + ' .likes').html("<i class='fa fa-heart-o fa-lg'></i>" + likes);
+		$(postid + ' .likes').html("<i class='fa fa-heart-o fa-lg'></i>&nbsp;&nbsp;" + likes);
 		$(postid + ' .author').html('Author: ' + author);
 		$(postid + ' .quote').html(quote);
 		$(postid + ' .date').html('Posted: ' + converttime(date));
 	}
 	
 }
-
 function newPost (auth, quote1) {
 	var database = firebase.database();
 	var current_username = $("#nav_me1").html();
@@ -87,7 +86,6 @@ function newPost (auth, quote1) {
 		$("#nav_posterror").show( "bounce", 500).fadeOut(1500);		
 	});
 	}
-
 function createnewpost () {
 	$("#post_error").hide();
 	var quote = $("#post_quote").val();
@@ -101,6 +99,15 @@ function createnewpost () {
 		$("#post_error").show("shake", 300);
 	}
 }
+function checkauth () {
+	if (firebase.auth().currentUser){
+		return true;
+	} else {
+		return false;
+		console.log("Not logged In!");
+	}
+}
+	
 function refreshposts (amount) {
 	disablebutton("#refresh");
 	$("#loading2").show();
@@ -135,6 +142,8 @@ function get_background_pic () {
     });
 }
 function set_background_pic (number) {
+	if (checkauth()) {
+		
 	switch(number) {
 		case 1:
 		console.log(number);
@@ -192,7 +201,7 @@ function set_background_pic (number) {
 		$("#pic9").addClass("settings_pic_selected");
 		break;
 	}
-		
+	};	
 }
 function settings_pic_clear () {
 	$("#background_select-container .background_select").removeClass("settings_pic_selected");
@@ -201,7 +210,17 @@ function settings_change_background (number) {
 	var numberpos = number.indexOf("c") + 1;
 	var number1 = Number(number.slice(numberpos));
 	var username = $("#nav_me1").html();
-	firebase.database().ref(username + "_background").set(number1);
+	firebase.database().ref(username + "_background").set(number1).then(function (result) {
+		get_background_pic();
+	},function (error) {
+		fail();
+	})
+}
+function fail () {
+	$("#nav_loggedin").hide();
+	$("#nav_loggedout").hide();
+	$("#nav_posterror").hide();
+	$("#nav_notloggedin").show( "bounce", 500).fadeOut(1500);
 }
 function disablebutton (id) {
 	$(id).prop("disabled",true);
@@ -351,8 +370,9 @@ function checkuser () {
 	});
 	enablebutton(sign_in);
 	enablebutton(sign_up);
+	$("#sign_in").removeClass("clicked");
 }
-/*function createuser () {
+function createuser () {
 	disablebutton("#sign_in");
 	disablebutton("#sign_up");
 	$("#wrongpass3").hide();
@@ -377,6 +397,7 @@ function checkuser () {
 		var usernametosave = username.toLowerCase();
 		firebase.database().ref(usernametosave + '_background').set(8);
 		$("#loading").hide();
+		nav_settings();
 	}, function(error) {
 		$("#wrongpass1").show();
 		$("#loading").hide();
@@ -393,7 +414,7 @@ function checkuser () {
 	}
 	enablebutton("#sign_in");
 	enablebutton("#sign_up");
-}*/
+}
 function firebase_signout() {
 	firebase.auth().signOut();
 }

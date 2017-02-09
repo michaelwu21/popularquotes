@@ -12,14 +12,15 @@
 	<script src="functions.js" type="text/javascript"></script>
 	<script src="jscookie/js.cookie.js" type="text/javascript"></script>
 	<script src="https://use.fontawesome.com/930fae84da.js"></script>
-	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+	<script src="mathjs/math.min.js" type="text/javascript"></script>
+	<script src="calc/calc.js" type='text/javascript'></script>
 	<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
-	<link rel="stylesheet" href="calc.css" />
-	<link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon.png?v=XBrexqJljw">
-	<link rel="icon" type="image/png" href="favicon-32x32.png?v=XBrexqJljw" sizes="32x32">
-	<link rel="icon" type="image/png" href="favicon-16x16.png?v=XBrexqJljw" sizes="16x16">
-	<link rel="manifest" href="manifest.json?v=XBrexqJljw">
-	<link rel="mask-icon" href="safari-pinned-tab.svg?v=XBrexqJljw" color="#5bbad5">
+	<link rel="stylesheet" href="calc/calc.css" />
+	<link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-touch-icon.png?v=XBrexqJljw">
+	<link rel="icon" type="image/png" href="favicon/favicon-32x32.png?v=XBrexqJljw" sizes="32x32">
+	<link rel="icon" type="image/png" href="favicon/favicon-16x16.png?v=XBrexqJljw" sizes="16x16">
+	<link rel="manifest" href="favicon/manifest.json?v=XBrexqJljw">
+	<link rel="mask-icon" href="favicon/safari-pinned-tab.svg?v=XBrexqJljw" color="#5bbad5">
 	<script src='spectrum/spectrum.js'></script>
 	<link rel='stylesheet' href='spectrum/spectrum.css' />
 	<meta name="theme-color" content="#ffffff">
@@ -50,6 +51,7 @@
 	  <li id="nav_loggedout"><a>Signed Out!</a></li>
 	  <li id="nav_posted"><a>Quote Posted!</a></li>
 	  <li id="nav_posterror"><a>Error Posting Quote!</a></li>
+	  <li id="nav_notloggedin"><a>Error: Not logged in!</a></li>
 	</ul>
 	</center>
 	</div>
@@ -140,44 +142,53 @@
 	<h1 id="delete_acc" style="color: red">Delete Account</h1>
 	</div>
 <div id="entire_calculator">
-<br><br>
+<br><br><br>
+	<h3 id="calc_limit">Limit reached!</h3>
+	<h3 id="calc_error">Expression is invalid or too large!</h3>
+	<br><br><br>
 	<div id="background">    
-        <div id="result"></div>
+        <div id="result"><p id="result1"></p></div>
              
          <div id="main">
              <div id="first-rows">
-              <button class="del-bg" id="delete">Del</button>
-                 <button value="%" class="btn-style operator opera-bg fall-back">%</button>
+              <button class="del-bg" id="delete">Clear</button>
+				 <button id="del" class="btn-style">&larr;</button>
                  <button value="+" class="btn-style opera-bg value align operator">+</button>
                  </div>
                  
                <div class="rows">
-             <button value="7" class="btn-style num-bg num first-child">7</button>
-                 <button value="8" class="btn-style num-bg num">8</button>
-                 <button value="9" class="btn-style num-bg num">9</button>
+				 <button value="(" class="leftpar btn-style opera-bg paran paranfirst">(</button>
+				 <button value=")" class="rightpar btn-style opera-bg paran">)</button>
+				 <button value="!" class="btn-style operator opera-bg fall-back">!</button>
                  <button value="-" class="btn-style opera-bg operator">-</button>
+                 </div>
+                 
+                 <div class="rows">
+				 <button value="7" class="btn-style num-bg num first-child">7</button>
+                 <button value="8" class="btn-style num-bg num">8</button>
+                 <button value="9" class="btn-style num-bg num">9</button>	
+                 <button value="*" class="btn-style opera-bg operator">x</button>
                  </div>
                  
                  <div class="rows">
                  <button value="4" class="btn-style num-bg num first-child">4</button>
                  <button value="5" class="btn-style num-bg num">5</button>
-                 <button value="6" class="btn-style num-bg num">6</button>
-                 <button value="*" class="btn-style opera-bg operator">x</button>
+                 <button value="6" class="btn-style num-bg num">6</button>				 
+                 <button value="/" class="btn-style opera-bg operator">/</button>
                  </div>
                  
                  <div class="rows">
                  <button value="1" class="btn-style num-bg num first-child">1</button>
                  <button value="2" class="btn-style num-bg num">2</button>
                  <button value="3" class="btn-style num-bg num">3</button>
-                 <button value="/" class="btn-style opera-bg operator">/</button>
-                 </div>
-                 
-                 <div class="rows">
-                 <button value="0" class="num-bg zero" id="delete">0</button>
-                 <button value="." class="btn-style num-bg period fall-back">.</button>
-                 <button value="=" id="eqn-bg" class="eqn align">=</button>
+				 <button id="^" class="btn-style opera-bg">^</button>
                  </div>
                 
+				 <div class="rows">
+                 <button value="0" class="num-bg zero" id="delete">0</button>
+                 <button value="." class="btn-style num-bg period fall-back">.</button>			 
+                 <button value="=" id="eqn-bg" class="eqn align">=</button>
+				 </div>
              </div>
          
          </div>
