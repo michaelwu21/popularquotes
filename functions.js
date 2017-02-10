@@ -36,7 +36,8 @@ function getPost (number) {
 			var poster1 = snap.child("poster").val();
 			var author = snap.child("author").val();
 			var quote = snap.child("quote").val();
-			showPost(likes, poster1, author, quote, date, previous);
+			var background = snap.child("backgroundcolor").val();
+			showPost(likes, poster1, author, quote, date, background, previous);
 			previous = date;
 		} else {
 			firebase.database().ref("posts/" + date).remove();
@@ -45,7 +46,7 @@ function getPost (number) {
 	});
 	enablebutton("#refresh");
 }
-function showPost (likes, poster, author, quote, date, previous) {
+function showPost (likes, poster, author, quote, date, background, previous) {
 	if (previous === 'none') {
 		$("<div class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><br><br><div class='quote'></div><br><div class='date'></div></div><br><br>").appendTo("#entire_home");
 		$('.post').first().attr('id', date);
@@ -55,6 +56,7 @@ function showPost (likes, poster, author, quote, date, previous) {
 		$(postid + ' .author').html('Author: ' + author);
 		$(postid + ' .quote').html(quote);
 		$(postid + ' .date').html('Posted: ' + converttime(date));
+		$(postid).css("background-color", background);
 	} else {
 		var previous1 = '#' + previous
 		$("<span class='post'><div class='poster1'></div><div class='likes'></div><br><div class='author'></div><br><br><br><div class='quote'></div><br><div class='date'></div></span><br><br>").insertBefore(previous1);			
@@ -65,10 +67,11 @@ function showPost (likes, poster, author, quote, date, previous) {
 		$(postid + ' .author').html('Author: ' + author);
 		$(postid + ' .quote').html(quote);
 		$(postid + ' .date').html('Posted: ' + converttime(date));
+		$(postid).css("background-color", background);
 	}
 	
 }
-function newPost (auth, quote1) {
+function newPost (auth, quote1, backgroundcolor) {
 	var database = firebase.database();
 	var current_username = $("#nav_me1").html();
 	var date = + new Date();
@@ -77,26 +80,38 @@ function newPost (auth, quote1) {
 		date: date,
 		author: auth,
 		quote: quote1,
-		likes: 0
+		likes: 0,
+		backgroundcolor: backgroundcolor
 	}).then(function(result) {
 		$("#nav_posterror").hide();
 		$("#nav_posted").show( "bounce", 500).fadeOut(1500);
+		$("#post_author").val("");
+		$("#post_quote").val("");
+		nav_home();
 	}, function(error) {
 		$("#nav_posted").hide();
 		$("#nav_posterror").show( "bounce", 500).fadeOut(1500);		
 	});
+	$("#postload").hide();
+	$("#post").show();
 	}
 function createnewpost () {
+	$("#post").hide();
+	$("#postload").show();
 	$("#post_error").hide();
 	var quote = $("#post_quote").val();
 	var author = $("#post_author").val();
+	var backgroundforpost = $("#customcolor").spectrum("get").toHexString();
+	console.log(backgroundforpost);
 	if (author === '') {
 		author = "Anonymous";
 	}
 	if (quote != "") {
-		newPost(author, quote);
+		newPost(author, quote, backgroundforpost);
 	} else {
 		$("#post_error").show("shake", 300);
+		$("#postload").hide();
+		$("#post").show();
 	}
 }
 function checkauth () {
